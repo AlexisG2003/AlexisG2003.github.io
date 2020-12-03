@@ -21,8 +21,21 @@ var init = function (window) {
         ////////////////////////////////////////////////////////////
         ///////////////// PROGRAM SETUP ////////////////////////////
         ////////////////////////////////////////////////////////////
-        
-        
+        var circle;
+        var circles = [];
+
+        function drawCircle() {
+            circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+            physikz.addRandomVelocity(circle, canvas);
+            view.addChild(circle);
+            circles.push(circle);
+        }
+
+        drawCircle();
+        drawCircle();
+        drawCircle();
+        drawCircle();
+        drawCircle();
 
 
         ////////////////////////////////////////////////////////////
@@ -36,7 +49,11 @@ var init = function (window) {
         */
         function update() {
             
-           
+           physikz.updatePosition()
+           physikz.updatePosition()
+           physikz.updatePosition()
+           physikz.updatePosition()
+           physikz.updatePosition()
             
         }
     
