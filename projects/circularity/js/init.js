@@ -24,18 +24,18 @@ var init = function (window) {
         var circle;
         var circles = [];
 
-        function drawCircle() {
+        function drawCircle(){
             circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-            physikz.addRandomVelocity(circle, canvas);
+            physikz.addRandomVelocity(circle, canvas, 500, 500);
             view.addChild(circle);
             circles.push(circle);
         }
-
-        drawCircle();
-        drawCircle();
-        drawCircle();
-        drawCircle();
-        drawCircle();
+            var loopsCompleted = 0;
+            while(loopsCompleted < 100) {
+                drawCircle()
+                loopsCompleted++
+            }
+        
 
 
         ////////////////////////////////////////////////////////////
@@ -49,12 +49,14 @@ var init = function (window) {
         */
         function update() {
             
-           physikz.updatePosition()
-           physikz.updatePosition()
-           physikz.updatePosition()
-           physikz.updatePosition()
-           physikz.updatePosition()
-            
+        
+
+            for (var i = 0; i < circles.length; i++) {
+             var eachValue = circles[i];
+             physikz.updatePosition(eachValue)
+             game.checkCirclePosition(eachValue)
+            }
+       
         }
     
         /* 
@@ -63,12 +65,20 @@ var init = function (window) {
         it to the opposite side of the screen.
         */
         game.checkCirclePosition = function(circle) {
-
+            
             // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
             if ( circle.x > canvas.width ) {
                 circle.x = 0;
             }
-            
+            if ( circle.y > canvas.height ) {
+                circle.y = 0;
+            }
+            if ( circle.y < 0 ) {
+                circle.y = canvas.height;
+             }
+            if ( circle.x < 0 ) {
+                circle.x = canvas.width;
+              }
         }
         
         /////////////////////////////////////////////////////////////
